@@ -4,3 +4,4 @@
 /dist.*
 /sm-api
 *.DS_Store
+/certs
