@@ -1,0 +1,23 @@
+[
+  {
+    "userId": 2,
+    "userName": "Manager",
+    "userEmail": "manager@web.com",
+    "userPassword": "manager1234",
+    "userAccessesLevel": 2
+  },
+  {
+    "userId": 1,
+    "userName": "admin",
+    "userEmail": "admin@web.com",
+    "userPassword": "admin1234",
+    "userAccessesLevel": 1
+  },
+  {
+    "userId": 3,
+    "userName": "Common",
+    "userEmail": "common@web.com",
+    "userPassword": "common1234",
+    "userAccessesLevel": 3
+  }
+]
