@@ -4,4 +4,5 @@
 /dist.*
 /sm-api
 *.DS_Store
-/certs
+/certs/*
+/certs/private.pem
