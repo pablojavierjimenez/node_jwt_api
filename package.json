@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
+    "api:v2": "nodemon server.js",
+    "api:v1":"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -7,6 +7,17 @@
   <img src="https://img.shields.io/github/stars/pablojavierjimenez/node_jwt_api?style=for-the-badge">
 </p>
 
+### Run project
+to run project you can use the next commands
+```bash
+# for the last version
+:~$ npm start
+# for V2
+:~$ npm run api:v2
+# for v1
+:~$ npm run api:v1
+```
+
 **Nota:** esto esta basado en este [tutorial JWT on NodeJS](https://www.youtube.com/watch?v=0g0Of8jlhN8&ab_channel=TutorialEdge)
 
 ## Como crear archivos pen en ubuntu con openssl
