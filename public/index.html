@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <!-- Estilos basicos -->
+  <style>
+    body {
+      font-size: 18px;
+      font-family: 'lora', monospace, serif;
+      letter-spacing: .02rem;
+    }
+
+    .text.html-text,
+    .text-container {
+      max-width: 800px;
+      margin: auto auto 5rem auto;
+    }
+
+    h2 {
+      margin-top: 3rem;
+    }
+
+    p {
+      max-width: 640px;
+      margin: auto;
+      line-height: 1.5rem;
+    }
+
+    .html-text blockquote {
+      color: #777;
+      border-left: 2px solid #ccc;
+      padding: 0 0 0 15px;
+      margin: .7em 0 .7em 1.5em;
+    }
+
+    img {
+      width: auto;
+      max-width: 93vw;
+    }
+
+    a {
+      text-decoration: none;
+      padding: .8rem;
+      margin: .5rem;
+      border: 1px solid lightgrey;
+      display: block;
+      color: darkblue;
+      transition: all ease-in;
+      transition-duration: .35s;
+    }
+
+    a:hover {
+      color: white;
+      font-weight: bold;
+      background-color: darkblue;
+    }
+  </style>
+
+  <!-- Fuentes de google font pueden borrarse -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
+
+  <!-- Fuentes de Iconos y demases de FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+
+  <!-- estilos propios -->
+  <!-- <link href="./styles.css" rel="stylesheet"> -->
+
+
+</head>
+
+<body>
+  <main>
+    <h1>hola mundo!!!</h1>
+
+    <section>
+      <input type="email" name="email" id="email" placeholder="admin@web.com">
+      <input type="password" name="password" id="password" placeholder="admin1234">
+      <button onclick="handleSubmit()">login</button>
+      <pre style="font-size: 12px;">
+        // Hardcoded test user
+        {
+          "userId": 2,
+          "userName": "Manager",
+          "userEmail": "manager@web.com",
+          "userPassword": "manager1234",
+          "userAccessesLevel": 2
+        },
+        {
+          "userId": 1,
+          "userName": "admin",
+          "userEmail": "admin@web.com",
+          "userPassword": "admin1234",
+          "userAccessesLevel": 1
+        },
+        {
+          "userId": 3,
+          "userName": "Common",
+          "userEmail": "common@web.com",
+          "userPassword": "common1234",
+          "userAccessesLevel": 3
+        }
+      </pre>
+    </section>
+
+  </main>
+  <script>
+    function loginUser() {
+      let email = document.getElementById('email').value;
+      let psw = document.getElementById('password').value;
+
+      var urls = {
+        login:'http://localhost:7000/login',
+        jwt:'http://localhost:7000/jwt',
+        userList:'http://localhost:7000/users'
+      };
+
+      var data = {
+        "email": email,
+        "password": psw
+      };
+
+      fetch(urls.login, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then( data => {
+        /**
+         * TODO: aca tengo que llamar al jwt
+         * traermelo y guardarlo en localstorage
+         * y mandandolo en los headers pedir la lista de users
+        */
+        console.log(data);
+        getToken();
+      })
+
+      function getToken() {
+        fetch(urls.jwt)
+        .then(res => res.json())
+        .then( data => {
+          localStorage.setItem('jwt', data);
+        })
+      }
+    }
+
+async function handleSubmit () {
+  //...
+  /**
+   * https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+   */
+  let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+  // Make the login API call
+
+  const response = await fetch('http://localhost:7000/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  //...
+  // Extract the JWT from the response
+  const { accessToken } = await response.json()
+  //...
+  // Do something the token in the login method
+  await login({ accessToken })
+}
+  </script>
+  <!-- <script src="./app.js"></script> -->
+</body>
+
+</html>
